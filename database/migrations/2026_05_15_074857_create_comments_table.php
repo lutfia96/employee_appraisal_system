@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('appraisal_period' , function(Blueprint $table){
-        $table->id();
-        $table->string('name');
-        $table->date('start_date');
-        $table->date('end_date');
-        $table->enum('status', ['pending', 'open', 'completed', 'closed'])->default('pending');
+        Schema::create('comments', function (Blueprint $table) {
+          $table->id();
+        $table->foreignId('employee_id')->constrained('employees')->onDelete('cascade');
+        $table->foreignId('evaluation_id')->constrained('evaluations')->onDelete('cascade');
+        $table->text('comment');
         $table->timestamps();
-    });
+        });
     }
 
     /**
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('comments');
     }
 };

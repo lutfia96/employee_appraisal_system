@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('evaluations', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('employee_id')->constrained('employee')->onDelete('cascade');
-            $table->foreignId('appraisal_period_id')->constrained('appraisal_period')->onDelete('cascade');
+          $table->id();
+            $table->foreignId('employee_id')->constrained('employees')->onDelete('cascade');
+            $table->foreignId('appraisal_period_id')->constrained('appraisal_periods')->onDelete('cascade');
             $table->decimal('score', 10, 2);
             $table->enum('status', ['pending', 'completed', 'approved', 'rejected'])->default('pending');
             $table->date('submitted_at')->nullable();

@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
-            $table->id();
-        $table->foreignId('employee_id')->constrained('employee')->onDelete('cascade');
-        $table->foreignId('evaluation_id')->constrained('evaluations')->onDelete('cascade');
-        $table->text('comment');
+        Schema::create('kpis', function (Blueprint $table) {
+          $table->id();
+        $table->string('name');
+        $table->text('description')->nullable();
+        $table->decimal('weight', 10, 2);
+        $table->foreignId('department_id')->constrained()->onDelete('cascade');
         $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('kpis');
     }
 };

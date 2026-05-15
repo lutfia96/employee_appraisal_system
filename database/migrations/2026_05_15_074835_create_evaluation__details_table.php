@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('evaluations_details', function (Blueprint $table) {
+        Schema::create('evaluation__details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('evaluation_id')->constrained()->onDelete('cascade');
-            $table->foreignId('kpi_id')->constrained()->onDelete('cascade');
+            $table->foreignId('evaluation_id')->constrained('evaluations')->onDelete('cascade');
+            $table->foreignId('kpi_id')->constrained('kpis')->onDelete('cascade');
             $table->decimal('self_score', 10, 2);
             $table->decimal('supervisor_score', 10, 2)->nullable();
             $table->text('remarks')->nullable();
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('evaluations_details');
+        Schema::dropIfExists('evaluation__details');
     }
 };

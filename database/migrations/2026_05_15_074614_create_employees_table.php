@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('employee', function (Blueprint $table) {
-           $table->id();
+        Schema::create('employees', function (Blueprint $table) {
+             $table->id();
         $table->string('address');
         $table->string('phone');
         $table->string('emp_no')->unique();
@@ -20,7 +20,7 @@ return new class extends Migration
         $table->date('hire_date');
         $table->foreignId('user_id')->constrained()->onDelete('cascade');
         $table->foreignId('department_id')->constrained()->onDelete('cascade');
-        $table->foreignId('supervisor_id')->nullable()->constrained('employee')->onDelete('set null');
+        $table->foreignId('supervisor_id')->nullable()->constrained('employees')->onDelete('set null');
         $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('employee');
+        Schema::dropIfExists('employees');
     }
 };

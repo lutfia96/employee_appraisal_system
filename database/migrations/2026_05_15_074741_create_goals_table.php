@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('goals', function (Blueprint $table) {
              $table->id();
-            $table->foreignId('employee_id')->constrained('employee')->onDelete('cascade');
+            $table->foreignId('employee_id')->constrained('employees')->onDelete('cascade');
             $table->string('title');
             $table->text('achievement'); 
             $table->text('description')->nullable();
             $table->date('due_date')->nullable();
             $table->foreignId('kpi_id')->constrained('kpis')->onDelete('cascade');
-            $table->foreignId('appraisal_period_id')->constrained('appraisal_period')->onDelete('cascade');
+            $table->foreignId('appraisal_period_id')->constrained('appraisal_periods')->onDelete('cascade');
             $table->enum('status', ['pending', 'in_progress', 'completed', 'failed'])->default('pending');
             $table->timestamps();
         });
